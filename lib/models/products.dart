@@ -92,7 +92,7 @@ class WooProduct {
   final List<int>? variations;
   final List<int>? groupedProducts;
   final int? menuOrder;
-  final List<MetaData> metaData;
+  final List<ProductMetaData> metaData;
 
   WooProduct(
       this.id,
@@ -223,7 +223,7 @@ class WooProduct {
         groupedProducts = json['grouped_products'].cast<int>(),
         menuOrder = json['menu_order'],
         metaData = (json['meta_data'] as List)
-            .map((i) => MetaData.fromJson(i))
+            .map((i) => ProductMetaData.fromJson(i))
             .toList();
 
   @override
@@ -259,14 +259,14 @@ class WooProductItemTag {
   toString() => 'Tag: $name';
 }
 
-class MetaData {
+class ProductMetaData {
   final int? id;
   final String? key;
   final String value;
 
-  MetaData(this.id, this.key, this.value);
+  ProductMetaData({this.id, this.key, required this.value});
 
-  MetaData.fromJson(Map<String, dynamic> json)
+  ProductMetaData.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         key = json['key'],
         value = json['value'].toString();

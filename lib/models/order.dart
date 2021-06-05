@@ -66,7 +66,7 @@ class WooOrder {
   String? dateCompleted;
   String? dateCompletedGmt;
   String? cartHash;
-  List<MetaData>? metaData;
+  List<OrderMetaData>? metaData;
   List<LineItems>? lineItems;
   List<TaxLines>? taxLines;
   List<ShippingLines>? shippingLines;
@@ -157,8 +157,9 @@ class WooOrder {
     dateCompleted = json['date_completed'];
     dateCompletedGmt = json['date_completed_gmt'];
     cartHash = json['cart_hash'];
-    metaData =
-        (json['meta_data'] as List).map((i) => MetaData.fromJson(i)).toList();
+    metaData = (json['meta_data'] as List)
+        .map((i) => OrderMetaData.fromJson(i))
+        .toList();
     if (json['line_items'] != null) {
       lineItems = <LineItems>[];
       json['line_items'].forEach((v) {
@@ -277,7 +278,7 @@ class WooOrderCouponLine {
   String? code;
   String? discount;
   String? discountTax;
-  List<MetaData> metaData;
+  List<OrderMetaData> metaData;
 
   WooOrderCouponLine(
       this.id, this.code, this.discount, this.discountTax, this.metaData);
@@ -288,7 +289,7 @@ class WooOrderCouponLine {
         discount = json['discount'],
         discountTax = json['discount_tax'],
         metaData = (json['meta_data'] as List)
-            .map((i) => MetaData.fromJson(i))
+            .map((i) => OrderMetaData.fromJson(i))
             .toList();
 
   Map<String, dynamic> toJson() {
@@ -310,7 +311,7 @@ class WooOrderFeeLine {
   String? total;
   String? totalTax;
   List<FeeLineTax> taxes;
-  List<MetaData> metaData;
+  List<OrderMetaData> metaData;
 
   WooOrderFeeLine(this.id, this.name, this.taxClass, this.taxStatus,
       this.totalTax, this.taxes, this.metaData);
@@ -325,7 +326,7 @@ class WooOrderFeeLine {
         taxes =
             (json['taxes'] as List).map((i) => FeeLineTax.fromJson(i)).toList(),
         metaData = (json['meta_data'] as List)
-            .map((i) => MetaData.fromJson(i))
+            .map((i) => OrderMetaData.fromJson(i))
             .toList();
 
   Map<String, dynamic> toJson() {
@@ -350,7 +351,7 @@ class FeeLineTax {
   bool? compound;
   String? taxTotal;
   String? shippingTaxTotal;
-  List<MetaData>? metaData;
+  List<OrderMetaData>? metaData;
 
   FeeLineTax(this.id, this.rateCode, this.rateId, this.label, this.compound,
       this.taxTotal, this.shippingTaxTotal, this.metaData);
@@ -364,8 +365,9 @@ class FeeLineTax {
     taxTotal = json['tax_total'];
     shippingTaxTotal = json['shipping_tax_total'];
     if (json['meta_data'] != null) {
-      metaData =
-          (json['meta_data'] as List).map((i) => MetaData.fromJson(i)).toList();
+      metaData = (json['meta_data'] as List)
+          .map((i) => OrderMetaData.fromJson(i))
+          .toList();
     }
   }
 
@@ -489,14 +491,14 @@ class Shipping {
   }
 }
 
-class MetaData {
+class OrderMetaData {
   int? id;
   String? key;
   String? value;
 
-  MetaData({this.id, this.key, this.value});
+  OrderMetaData({this.id, this.key, this.value});
 
-  MetaData.fromJson(Map<String, dynamic> json) {
+  OrderMetaData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     key = json['key'];
     value = json['value'];
@@ -545,7 +547,7 @@ class LineItems {
   String? total;
   String? totalTax;
   List<Taxes>? taxes;
-  List<MetaData>? metaData;
+  List<OrderMetaData>? metaData;
   String? sku;
   String? price;
 
@@ -577,8 +579,9 @@ class LineItems {
     total = json['total'];
     totalTax = json['total_tax'];
     taxes = (json['taxes'] as List).map((i) => Taxes.fromJson(i)).toList();
-    metaData =
-        (json['meta_data'] as List).map((i) => MetaData.fromJson(i)).toList();
+    metaData = (json['meta_data'] as List)
+        .map((i) => OrderMetaData.fromJson(i))
+        .toList();
     sku = json['sku'];
     price = json['price'].toString();
   }
@@ -640,7 +643,7 @@ class TaxLines {
   bool? compound;
   String? taxTotal;
   String? shippingTaxTotal;
-  List<MetaData>? metaData;
+  List<OrderMetaData>? metaData;
 
   TaxLines(
       {this.id,
@@ -660,8 +663,9 @@ class TaxLines {
     compound = json['compound'];
     taxTotal = json['tax_total'];
     shippingTaxTotal = json['shipping_tax_total'];
-    metaData =
-        (json['meta_data'] as List).map((i) => MetaData.fromJson(i)).toList();
+    metaData = (json['meta_data'] as List)
+        .map((i) => OrderMetaData.fromJson(i))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -687,7 +691,7 @@ class ShippingLines {
   String? total;
   String? totalTax;
   List<Taxes>? taxes;
-  List<MetaData>? metaData;
+  List<OrderMetaData>? metaData;
 
   ShippingLines(
       {this.id,
@@ -706,8 +710,9 @@ class ShippingLines {
     totalTax = json['total_tax'];
 
     taxes = (json['taxes'] as List).map((i) => Taxes.fromJson(i)).toList();
-    metaData =
-        (json['meta_data'] as List).map((i) => MetaData.fromJson(i)).toList();
+    metaData = (json['meta_data'] as List)
+        .map((i) => OrderMetaData.fromJson(i))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
