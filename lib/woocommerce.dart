@@ -1236,7 +1236,11 @@ class WooCommerce {
       'product': product,
       'dp': dp,
     }).forEach((k, v) {
-      if (v != null) payload[k] = v.toString();
+      if (v != null) {
+        if (k == 'status')
+          payload[k] = v.toString().replaceAll('[', '').replaceAll(']', '');
+        payload[k] = v.toString();
+      }
     });
     List<WooOrder> orders = [];
     _printToLog('Getting Order With Payload : ' + payload.toString());
