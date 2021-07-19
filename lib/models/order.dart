@@ -494,7 +494,7 @@ class Shipping {
 class OrderMetaData {
   int? id;
   String? key;
-  String? value;
+  Map<String, dynamic>? value;
 
   OrderMetaData({this.id, this.key, this.value});
 
