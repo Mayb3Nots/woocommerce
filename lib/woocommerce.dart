@@ -1237,8 +1237,10 @@ class WooCommerce {
       'dp': dp,
     }).forEach((k, v) {
       if (v != null) {
-        if (k == 'status')
+        if (k == 'status') {
           payload[k] = v.toString().replaceAll('[', '').replaceAll(']', '');
+          return;
+        }
         payload[k] = v.toString();
       }
     });
